@@ -9,10 +9,17 @@ const connection = await createConnection({
 });
 
 // inserting new data
-let q = "INSERT INTO user (id, username , email, password) VALUES (?, ?, ?, ?)";
-let user = ["123", "123_newuser", "abc@gmail.com", "abc"];
+// let q = "INSERT INTO user (id, username , email, password) VALUES (?, ?, ?, ?)";
+// let user = ["123", "123_newuser", "abc@gmail.com", "abc"];
+
+// for multiple users
+
+let q = "INSERT INTO user (id, username , email, password) VALUES ?";
+
+let users = [["123", "123_newuser", "abc@gmail.com", "abc"], ["123a", "12a3_newuser", "abc@gaail.com", "abac"]];
+
 try {
-    connection.query(q, user, (err, result) => {
+    connection.query(q, [users], (err, result) => {
         if (err) throw err;
         console.log(result);
         console.log(result.length);
