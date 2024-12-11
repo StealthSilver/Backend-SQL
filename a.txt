@@ -1,0 +1,11 @@
+Faker -> to generate fake data 
+
+̀MySQL2 package -> to connect Node with MySQL 
+
+connection.end(); // to close connection
+
+Using SQL from the cli 
+
+/usr/local/mysql/bin/mysql -u root -p 
+
+connection.end(); -> to close the connection
