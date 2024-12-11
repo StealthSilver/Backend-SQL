@@ -9,3 +9,7 @@ Using SQL from the cli
 /usr/local/mysql/bin/mysql -u root -p 
 
 connection.end(); -> to close the connection
+
+we can also create schema.sql files to work with sql 
+
+INSERT data using placeholders
