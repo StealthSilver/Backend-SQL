@@ -27,7 +27,6 @@ let getRandomUser = () => {
 
 
 
-
 // try {
 //     connection.query(q, [data], (err, result) => {
 //         if (err) throw err;
@@ -41,7 +40,7 @@ let getRandomUser = () => {
 
 // connection.end();
 
-
+// home route
 app.get("/", (req, res) => {
     let q = `SELECT COUNT(*) FROM user`;
     try {
@@ -56,6 +55,21 @@ app.get("/", (req, res) => {
         res.send("some error in db")
     }
 });
+
+//sow route
+app.get("/user", (req, res) => {
+    let q = "SELECT * FROM user";
+    try {
+        connection.query(q, (err, users) => {
+            if (err) throw err;
+
+            res.render("Users.ejs", { users });
+        })
+    } catch (err) {
+        console.log(err);
+        res.send("some error in db")
+    }
+})
 
 app.listen("3000", () => {
     console.log("server is listening to port 3000")
