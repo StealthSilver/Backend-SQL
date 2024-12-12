@@ -24,3 +24,7 @@ GET / user -> show users (email ,id, username) ejs
 PATCH / user / :id -> username edit 
 POST / user -> to add new user
 DELETE / user / id -> to delete the use by getting the password 
+
+
+GET/user/:id/edit -> to get  form to edit the username, based on id this form will require a password 
+PATCH/user/:id -> TO edit username. if correct password was entered in form
