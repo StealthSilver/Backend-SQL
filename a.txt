@@ -13,3 +13,13 @@ connection.end(); -> to close the connection
 we can also create schema.sql files to work with sql 
 
 INSERT data using placeholders
+
+Insert data in bulk 
+
+Routing 
+
+GET -> show no of users in the db
+GET / user -> show users (email ,id, username) ejs 
+PATCH / user / :id -> username edit 
+POST / user -> to add new user
+DELETE / user / id -> to delete the use by getting the password

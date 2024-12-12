@@ -12,14 +12,34 @@ const connection = await createConnection({
 // let q = "INSERT INTO user (id, username , email, password) VALUES (?, ?, ?, ?)";
 // let user = ["123", "123_newuser", "abc@gmail.com", "abc"];
 
-// for multiple users
+// for multiple users̀
+// let q = "INSERT INTO user (id, username , email, password) VALUES ?";
+// let users = [["123", "123_newuser", "abc@gmail.com", "abc"], ["123a", "12a3_newuser", "abc@gaail.com", "abac"]];
+
+
+
+
+let getRandomUser = () => {
+    return [
+        faker.string.uuid(),
+        faker.internet.username(),
+        faker.internet.email(),
+        faker.internet.password(),
+    ];
+};
+
+
+// for inserting data in bulk 
 
 let q = "INSERT INTO user (id, username , email, password) VALUES ?";
+let data = [];
+for (let i = 0; i <= 100; i++) {
+    data.push(getRandomUser());
+}
 
-let users = [["123", "123_newuser", "abc@gmail.com", "abc"], ["123a", "12a3_newuser", "abc@gaail.com", "abac"]];
 
 try {
-    connection.query(q, [users], (err, result) => {
+    connection.query(q, [data], (err, result) => {
         if (err) throw err;
         console.log(result);
         console.log(result.length);
@@ -30,14 +50,3 @@ try {
 }
 
 connection.end();
-
-let getRandomUser = () => {
-    return {
-        userId: faker.string.uuid(),
-        username: faker.internet.username(),
-        email: faker.internet.email(),
-        password: faker.internet.password(),
-
-    };
-}
-

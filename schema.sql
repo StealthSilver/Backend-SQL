@@ -5,4 +5,4 @@ CREATE TABLE user(
     password VARCHAR(50) NOT NULL
 );
 
-SHOW TABLES
+SHOW TABLES;
