@@ -1,5 +1,12 @@
 import { faker } from '@faker-js/faker';
 import { createConnection } from "mysql2";
+import express from 'express';
+const app = express();
+import path from "path";
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const connection = await createConnection({
     host: 'localhost',
@@ -7,16 +14,6 @@ const connection = await createConnection({
     database: 'mega_app',
     password: 'Silver@1005'
 });
-
-// inserting new data
-// let q = "INSERT INTO user (id, username , email, password) VALUES (?, ?, ?, ?)";
-// let user = ["123", "123_newuser", "abc@gmail.com", "abc"];
-
-// for multiple users̀
-// let q = "INSERT INTO user (id, username , email, password) VALUES ?";
-// let users = [["123", "123_newuser", "abc@gmail.com", "abc"], ["123a", "12a3_newuser", "abc@gaail.com", "abac"]];
-
-
 
 
 let getRandomUser = () => {
@@ -29,24 +26,37 @@ let getRandomUser = () => {
 };
 
 
-// for inserting data in bulk 
-
-let q = "INSERT INTO user (id, username , email, password) VALUES ?";
-let data = [];
-for (let i = 0; i <= 100; i++) {
-    data.push(getRandomUser());
-}
 
 
-try {
-    connection.query(q, [data], (err, result) => {
-        if (err) throw err;
-        console.log(result);
-        console.log(result.length);
-        console.log(result[0]);
-    })
-} catch (err) {
-    console.log(err);
-}
+// try {
+//     connection.query(q, [data], (err, result) => {
+//         if (err) throw err;
+//         console.log(result);
+//         console.log(result.length);
+//         console.log(result[0]);
+//     })
+// } catch (err) {
+//     console.log(err);
+// }
 
-connection.end();
+// connection.end();
+
+
+app.get("/", (req, res) => {
+    let q = `SELECT COUNT(*) FROM user`;
+    try {
+        connection.query(q, (err, result) => {
+            if (err) throw err;
+
+            let count = (result[0]["COUNT(*)"]);
+            res.render("home.ejs", { count });
+        })
+    } catch (err) {
+        console.log(err);
+        res.send("some error in db")
+    }
+});
+
+app.listen("3000", () => {
+    console.log("server is listening to port 3000")
+})
